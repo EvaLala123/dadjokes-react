@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './style.css';
 
-const Joke = () => {
+const Joke = ({ userAvatar, userName, text, likes, dislikes }) => {
   const [likeUp, setLikeUp] = useState(0);
   const [likeDown, setLikeDown] = useState(0);
 
@@ -17,17 +17,10 @@ const Joke = () => {
     <div className="joke">
       <div className="joke__body">
         <div className="joke__user">
-          <img
-            className="user-avatar"
-            src="https://raw.githubusercontent.com/Czechitas-podklady-WEB/dadjokes/main/users/user01.png"
-          />
-          <p className="user-name">Neroxx</p>
+          <img className="user-avatar" src={userAvatar} />
+          <p className="user-name">{userName}</p>
         </div>
-        <p className="joke__text">
-          The secret service isn't allowed to yell "Get down!" anymore when the
-          president is about to be attacked. Now they have to yell "Donald,
-          duck!
-        </p>
+        <p className="joke__text">{text}</p>
       </div>
 
       <div className="joke__likes">
@@ -36,8 +29,9 @@ const Joke = () => {
           className="btn-like btn-like--up"
           onClick={handleLikeUpClick}
         ></button>
+
         <span id="likes-up" className="likes-count likes-count--up">
-          {likeUp}
+          {likes + likeUp}
         </span>
         <button
           id="btn-down"
@@ -45,10 +39,12 @@ const Joke = () => {
           onClick={handleLikeDownClick}
         ></button>
         <span id="likes-down" className="likes-count likes-count--down">
-          {likeDown}
+          {dislikes + likeDown}
         </span>
       </div>
     </div>
   );
 };
 export default Joke;
+
+// chtěl jsem hodnoty v props likes, dislikes rovnou strčit do počátečního stavu, ale nějak to nebralo :-).
